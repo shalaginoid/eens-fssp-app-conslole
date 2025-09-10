@@ -13,8 +13,9 @@ process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
     const result = await sql.query('SELECT cookie FROM dbo.AccessToken WHERE id = 1');
     const cookies = result.recordset[0].cookie;
 
-    const concatArray = JSON.parse(cookies).map((item) => `${item.name}=${item.value}`);
-    const cookiesString = concatArray.join('; ');
+    const cookiesString = JSON.parse(cookies)
+      .map((item) => `${item.name}=${item.value}`)
+      .join('; ');
 
     const options = {
       headers: {
