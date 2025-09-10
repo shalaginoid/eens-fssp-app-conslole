@@ -17,20 +17,22 @@ export default async function (data, cookiesString) {
         responseType: 'arraybuffer',
       });
 
-      const xml = parser.parse(response.data)['fssp:OIp'];
+      if (response.status === 200) {
+        const xml = parser.parse(response.data)['fssp:OIp'];
 
-      result.push({
-        fileName: item.fileName,
-        fileSize: item.fileSize,
-        messageId: item.messageId,
-        notifyID: item.notifyID,
-        notifyDate: item.notifyDate,
-        attachmentId: item.attachmentId,
-        mimeType: item.mimeType,
-        parentId: item.parentId,
-        status: item.status,
-        data: xml,
-      });
+        result.push({
+          fileName: item.fileName,
+          fileSize: item.fileSize,
+          messageId: item.messageId,
+          notifyID: item.notifyID,
+          notifyDate: item.notifyDate,
+          attachmentId: item.attachmentId,
+          mimeType: item.mimeType,
+          parentId: item.parentId,
+          status: item.status,
+          data: xml,
+        });
+      }
     } catch (error) {
       console.log(error.message);
     }

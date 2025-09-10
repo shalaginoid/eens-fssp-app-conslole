@@ -14,20 +14,22 @@ export default async function (data, cookiesString) {
         responseType: 'arraybuffer',
       });
 
-      const base64 = Buffer.from(response.data, 'binary').toString('base64');
+      if (response.status === 200) {
+        const base64 = Buffer.from(response.data, 'binary').toString('base64');
 
-      result.push({
-        fileName: item.fileName,
-        fileSize: item.fileSize,
-        messageId: item.messageId,
-        notifyID: item.notifyID,
-        notifyDate: item.notifyDate,
-        attachmentId: item.attachmentId,
-        mimeType: item.mimeType,
-        parentId: item.parentId,
-        status: item.status,
-        data: base64,
-      });
+        result.push({
+          fileName: item.fileName,
+          fileSize: item.fileSize,
+          messageId: item.messageId,
+          notifyID: item.notifyID,
+          notifyDate: item.notifyDate,
+          attachmentId: item.attachmentId,
+          mimeType: item.mimeType,
+          parentId: item.parentId,
+          status: item.status,
+          data: base64,
+        });
+      }
     } catch (error) {
       console.log(error.message);
     }
