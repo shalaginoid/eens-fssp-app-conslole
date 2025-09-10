@@ -4,7 +4,8 @@
   "type": "module",
   "main": "app.js",
   "scripts": {
-    "start": "node --no-warnings app"
+    "start": "node --no-warnings app",
+    "dev": "node app"
   },
   "author": "shalaginov-ka",
   "license": "ISC",
