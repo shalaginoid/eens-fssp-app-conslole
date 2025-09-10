@@ -27,9 +27,9 @@ process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
       },
     };
 
-    const date = moment().subtract(1, 'day').format('YYYY-MM-DD');
-    // const date = '2025-09-09';
-    const feeds = await useGetFeedsByDate(date, options); //.filter((item) => item.notifyId === 2000007948365414);
+    // const date = moment().subtract(1, 'day').format('YYYY-MM-DD');
+    const date = '2025-09-09';
+    const feeds = (await useGetFeedsByDate(date, options)).filter((item) => item.notifyId === 2000007948365414);
 
     await useStartApp(feeds, options, cookiesString);
   } catch (error) {
