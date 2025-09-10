@@ -10,7 +10,6 @@ export default async function (feeds, options, cookiesString) {
   const messages = await useGetMessages(notifications);
   const attachments = await useGetAttachments(messages);
 
-  /*
   // Получаем все xml-файлы и добавляем URL-адреса
   const xmlFiles = attachments
     .filter((item) => item.mimeType === 'application/xml' && item.status === 'READY' && item.eds === 'OK')
@@ -18,7 +17,6 @@ export default async function (feeds, options, cookiesString) {
       ...item,
       url: `https://www.gosuslugi.ru/api/lk/geps/file/download/${item.attachmentId}?inline=false`,
     }));
-  */
 
   // Получаем все pdf-файлы и добавляем URL-адреса
   const pdfFiles = attachments
@@ -28,10 +26,8 @@ export default async function (feeds, options, cookiesString) {
       url: `https://www.gosuslugi.ru/api/lk/geps/file/download/${item.attachmentId}?inline=false`,
     }));
 
-  // const loadedXmlFiles = await useGetAllXmlFiles(xmlFiles, cookiesString);
+  const loadedXmlFiles = await useGetAllXmlFiles(xmlFiles, cookiesString);
   const loadedPdfFiles = await useGetAllPdfFiles(pdfFiles, cookiesString);
-
-  /*
 
   // Записываем сообщения в БД
   for await (const xml of loadedXmlFiles) {
@@ -83,5 +79,4 @@ export default async function (feeds, options, cookiesString) {
       console.log(error.message);
     }
   }
-  */
 }
