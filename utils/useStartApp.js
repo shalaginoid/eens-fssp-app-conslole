@@ -45,34 +45,35 @@ export default async function (feeds, options, cookiesString) {
   }
 
   // Записываем файлы в БД
-  const sqlDataPdf = loadedPdfFiles.map((item) => {
-    return {
-      fileName: item.fileName,
-      fileSize: item.fileSize,
-      messageId: item.messageId,
-      attachmentId: item.attachmentId,
-      mimeType: item.mimeType,
-      parentId: item.parentId,
-      status: item.status,
-      data: item.data,
-    };
-  });
+  // const sqlDataPdf = loadedPdfFiles.map((item) => {
+  //   return {
+  //     fileName: item.fileName,
+  //     fileSize: item.fileSize,
+  //     messageId: item.messageId,
+  //     attachmentId: item.attachmentId,
+  //     mimeType: item.mimeType,
+  //     parentId: item.parentId,
+  //     status: item.status,
+  //     data: item.data,
+  //   };
+  // });
 
-  for await (const mess of sqlDataPdf) {
+  // Записываем файлы в БД
+  for await (const mess of loadedPdfFiles) {
     try {
       const query = `
-      INSERT INTO dbo.Files (messageId, fileName, fileSize, attachmentId, mimeType, parentId, status, attachment)
-      values (
-        '${mess.messageId}',
-        '${mess.fileName}',
-        '${mess.fileSize}',
-        '${mess.attachmentId}',
-        '${mess.mimeType}',
-        '${mess.parentId}',
-        '${mess.status}',
-        '${mess.data}'
-      )
-    `;
+        INSERT INTO dbo.Files (messageId, fileName, fileSize, attachmentId, mimeType, parentId, status, attachment)
+        values (
+          '${mess.messageId}',
+          '${mess.fileName}',
+          '${mess.fileSize}',
+          '${mess.attachmentId}',
+          '${mess.mimeType}',
+          '${mess.parentId}',
+          '${mess.status}',
+          '${mess.data}'
+        )
+      `;
       await sql.query(query);
     } catch (error) {
       console.log(error.message);
