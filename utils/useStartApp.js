@@ -26,6 +26,11 @@ export default async function (feeds, options, cookiesString) {
       url: `https://www.gosuslugi.ru/api/lk/geps/file/download/${item.attachmentId}?inline=false`,
     }));
 
+  // Предзапросы
+  await useGetAllXmlFiles(xmlFiles, cookiesString);
+  await useGetAllPdfFiles(pdfFiles, cookiesString);
+
+  // Запросы
   const loadedXmlFiles = await useGetAllXmlFiles(xmlFiles, cookiesString);
   const loadedPdfFiles = await useGetAllPdfFiles(pdfFiles, cookiesString);
 
