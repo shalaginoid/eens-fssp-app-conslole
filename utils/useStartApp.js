@@ -45,20 +45,6 @@ export default async function (feeds, options, cookiesString) {
   }
 
   // Записываем файлы в БД
-  // const sqlDataPdf = loadedPdfFiles.map((item) => {
-  //   return {
-  //     fileName: item.fileName,
-  //     fileSize: item.fileSize,
-  //     messageId: item.messageId,
-  //     attachmentId: item.attachmentId,
-  //     mimeType: item.mimeType,
-  //     parentId: item.parentId,
-  //     status: item.status,
-  //     data: item.data,
-  //   };
-  // });
-
-  // Записываем файлы в БД
   for await (const mess of loadedPdfFiles) {
     try {
       const query = `
