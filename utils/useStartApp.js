@@ -12,7 +12,7 @@ export default async function (feeds, options, cookiesString) {
 
   // Получаем все xml-файлы и добавляем URL-адреса
   const xmlFiles = attachments
-    .filter((item) => item.mimeType === 'application/xml' && item.status === 'READY' && item.eds === 'OK')
+    .filter((item) => item.mimeType === 'application/xml' && item.status === 'READY')
     .map((item) => ({
       ...item,
       url: `https://www.gosuslugi.ru/api/lk/geps/file/download/${item.attachmentId}?inline=false`,
